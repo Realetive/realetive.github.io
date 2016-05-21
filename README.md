@@ -8,6 +8,7 @@
 * MODX Ambassador в России;
 * руководитель санкт-петербургского клуба разработчиков MODX;
 * активный участник и докладчик сообщества SPB Frontend;
+* соавтор коллективного Твиттер-аккаунта верстальщиков [@cssunderhood](//cssunderhood.ru/Realetive/)</a>;
 * Яндекс Yet Another Conference 2014;
 * РИТ FrontentConf 2015;
 * организатор на слёте разработчиков Санкт-Петербурга IT Global MeetUp (Piter United)…
