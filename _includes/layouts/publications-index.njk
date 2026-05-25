@@ -8,7 +8,7 @@ layout: layouts/base.njk
 		<div class="pub-section">
 			<p class="section-label">Письменные</p>
 			<h1 class="section-title">Статьи</h1>
-			<ul class="pub-list">
+			<ul class="pub-list" role="list">
 				{%- for article in collections.articles %}
 				<li>
 					<a href="{{ article.data.url or article.url }}" class="pub-item"{% if article.data.url %} target="_blank" rel="noopener noreferrer"{% endif %}>

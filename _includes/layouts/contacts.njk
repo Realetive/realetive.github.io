@@ -15,7 +15,7 @@ layout: layouts/base.njk
 				<p class="contacts-intro">
 					{{ person.lead }}
 				</p>
-				<ul class="contacts-links">
+				<ul class="contacts-links" role="list">
 					{%- for contact in person.contacts %}
 					<li class="contact-link-item">
 						<a href="{{ contact.url }}" target="_blank" rel="noopener noreferrer">

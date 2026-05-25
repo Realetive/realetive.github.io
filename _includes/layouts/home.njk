@@ -35,14 +35,14 @@ layout: layouts/base.njk
 	<div class="section__inner">
 		<p class="section-label">Опыт</p>
 		<h2 class="section-title">Карьера</h2>
-		<ul class="career" aria-label="История работы">
+		<ul class="career" role="list" aria-label="История работы">
 			{%- for item in career %}
 			<li class="career__item">
 				<div class="career__period">{{ item.period }}</div>
 				<div class="career__body">
 					<div class="career__company">{{ item.company }}</div>
 					<div class="career__role">{{ item.role }}</div>
-					<ul class="career__points">
+					<ul class="career__points" role="list">
 						{%- for point in item.points %}
 						<li>{{ point }}</li>
 						{%- endfor %}

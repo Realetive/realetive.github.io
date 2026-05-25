@@ -2,12 +2,12 @@ export default [
 	{
 		icon: "users",
 		title: "People Management",
-		desc: "Найм, развитие и удержание. Менторство junior→middle→senior. Перформанс-ревью. Согласование инкризов 10%+ ежегодно.",
+		desc: "Найм, развитие и удержание. Менторство junior → middle → senior. Перформанс-ревью.",
 	},
 	{
 		icon: "zap",
 		title: "Agile & Engineering",
-		desc: "Scrum, Kanban. Внедрение code review, mob programming, CI/CD. Снижение time-to-market на 40%.",
+		desc: "Scrum, Kanban, экстремальное программирование (XP). Code review, mob programming, CI/CD. Снижение time-to-market на 40%.",
 	},
 	{
 		icon: "code-2",

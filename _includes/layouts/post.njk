@@ -7,7 +7,7 @@ layout: layouts/base.njk
 <style>{% include "css/prism-diff.css" %}</style>
 <h1>{{ title }}</h1>
 
-<ul class="post-metadata">
+<ul class="post-metadata" role="list">
 	<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
 	{%- for tag in tags | filterTagList %}
 	{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
@@ -21,7 +21,7 @@ layout: layouts/base.njk
 {%- set previousPost = collections.posts | getPreviousCollectionItem %}
 {%- set nextPost = collections.posts | getNextCollectionItem %}
 {%- if nextPost or previousPost %}
-<ul class="links-nextprev">
+<ul class="links-nextprev" role="list">
 	{%- if previousPost %}<li class="links-nextprev-prev">← Previous<br> <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a></li>{% endif %}
 	{%- if nextPost %}<li class="links-nextprev-next">Next →<br><a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a></li>{% endif %}
 </ul>

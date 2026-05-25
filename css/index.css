@@ -715,6 +715,7 @@ h6 {
 	position: absolute;
 	inset: 0;
 	z-index: 0;
+	background-image: url('/img/hero-bg.png');
 	background-size: cover;
 	background-position: center;
 	opacity: 0.28;
@@ -1575,4 +1576,32 @@ h6 {
 	font-weight: 500;
 	color: var(--color-text);
 	line-height: 1.5;
+}
+
+/* ============================================================
+   ACCESSIBILITY
+============================================================ */
+
+/* Focus-visible for keyboard navigation */
+:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
+	border-radius: var(--radius-sm);
+}
+
+/* Remove default focus ring for mouse users */
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
