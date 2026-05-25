@@ -1,11 +1,12 @@
 export default {
 	title: "Роман Ганин",
-	url: "https://RomanGanin.ru/",
+	url: "https://romanganin.ru/",
 	language: "ru",
-	description: "Персональный сайт Романа Ганина — руководителя проектов, разработчика, эксперта web-технологий",
+	description: "Роман Ганин — фронт-лид и руководитель IT-команд. 15+ лет в разработке, опыт в Сбере, Яндексе, Nevatrip. Открытые проекты, публикации, доклады.",
 	author: {
 		name: "Роман Ганин",
-		email: "RomanGanin.ru@RomanGanin.ru",
-		url: "https://RomanGanin.ru/about-me/"
+		telegram: "https://t.me/realetive",
+		github: "https://github.com/realetive",
+		doka: "https://doka.guide/people/realetive/",
 	}
 }
