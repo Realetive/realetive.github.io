@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ metadata.language }}">
+<html lang="{{ metadata.language }}" data-theme="dark">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,68 +7,147 @@
 		<meta name="description" content="{{ description or metadata.description }}">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
 
-		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
-		{#- <meta name="generator" content="{{ eleventy.generator }}"> #}
+		{#- Fonts #}
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet" />
 
-		{#-
-		Plain-text bundles are provided via the `eleventy-plugin-bundle` plugin:
-		1. CSS:
-			* Add to a per-page bundle using `{% css %}{% endcss %}`
-			* Retrieve bundle content using `{% getBundle "css" %}` or `{% getBundleFileUrl "css" %}`
-		2. Or for JavaScript:
-			* Add to a per-page bundle using `{% js %}{% endjs %}`
-			* Retrieve via `{% getBundle "js" %}` or `{% getBundleFileUrl "js" %}`
-		3. Learn more: https://github.com/11ty/eleventy-plugin-bundle
-		#}
+		{#- Lucide Icons #}
+		<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 
-		{#- Add CSS to the bundle #}
-		<style>/* This is an arbitrary CSS string added to the bundle */</style>
-
-		{#- Add the contents of a file to the bundle #}
+		{#- CSS bundle #}
 		<style>{% include "css/index.css" %}</style>
-
-		{#- Or you can add from node_modules #}
-		{# <style>{% include "node_modules/something.css" %}</style> #}
-
-		{#- Render the CSS bundle using inlined CSS (for the fastest site performance in production) #}
 		<style>{% getBundle "css" %}</style>
-
-		{#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
-		{#- <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
-
-		{#- Add the heading-anchors web component to the JavaScript bundle #}
-		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
 	</head>
 	<body>
-		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+		{#- Skip link #}
+		<a href="#main" class="skip-link">Перейти к содержимому</a>
 
-		<header>
-			<a href="/" class="home-link">{{ metadata.title }}</a>
+		{#- Mobile nav overlay #}
+		<nav class="nav-mobile" id="mobileNav" role="navigation" aria-label="Мобильное меню">
+			<button class="nav-mobile__close" id="mobileClose" aria-label="Закрыть меню">
+				<i data-lucide="x" width="24" height="24"></i>
+			</button>
+			{%- for entry in collections.all | eleventyNavigation %}
+			<a href="{{ entry.url }}" class="nav-mobile__link"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a>
+			{%- endfor %}
+		</nav>
 
-			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-			<nav>
-				<h2 class="visually-hidden">Top level navigation menu</h2>
-				<ul class="nav">
-				{%- for entry in collections.all | eleventyNavigation %}
-					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
-				{%- endfor %}
-				</ul>
-			</nav>
+		{#- Header (sticky, backdrop-blur) #}
+		<header class="header" id="siteHeader">
+			<div class="header__inner">
+				<a href="/" class="logo" aria-label="Главная">
+					<svg class="logo__mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+						<rect width="36" height="36" rx="8" fill="currentColor" fill-opacity="0.08"/>
+						<path d="M10 26V10h8a6 6 0 0 1 0 12h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<circle cx="24" cy="24" r="3" fill="var(--color-primary)"/>
+					</svg>
+					<div class="logo__name">
+						Роман Ганин
+						<span>фронт-лид</span>
+					</div>
+				</a>
+
+				<nav class="nav" role="navigation" aria-label="Основное меню">
+					{%- for entry in collections.all | eleventyNavigation %}
+					<a href="{{ entry.url }}" class="nav__link{% if entry.url == page.url %} active{% endif %}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a>
+					{%- endfor %}
+				</nav>
+
+				<div class="header__actions">
+					<button class="btn-theme" data-theme-toggle aria-label="Переключить тему">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+					</button>
+					<button class="nav-hamburger" id="mobileOpen" aria-label="Открыть меню">
+						<i data-lucide="menu" width="20" height="20"></i>
+					</button>
+				</div>
+			</div>
 		</header>
 
 		<main id="main">
-			<heading-anchors>
-				{{ content | safe }}
-			</heading-anchors>
+			{{ content | safe }}
 		</main>
 
-		<footer>
-			<p>
-				<em>Built with <a href="https://www.11ty.dev/">{{ eleventy.generator }}</a></em>
-			</p>
+		<footer class="footer">
+			<div class="footer__inner">
+				<span class="footer__copy">© {{ "now" | dateYear }} Роман Ганин</span>
+				<div class="footer__links">
+					<a href="https://github.com/realetive" target="_blank" rel="noopener noreferrer">GitHub</a>
+					<a href="https://t.me/realetive" target="_blank" rel="noopener noreferrer">Telegram</a>
+					<a href="https://doka.guide/people/realetive/" target="_blank" rel="noopener noreferrer">Doka</a>
+				</div>
+			</div>
 		</footer>
 
-		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
+		{#- JS: theme toggle, mobile menu, header scroll, lucide icons #}
+		{% js %}
+			// ── ICONS ──
+			document.addEventListener('DOMContentLoaded', () => {
+				if (typeof lucide !== 'undefined') lucide.createIcons();
+			});
+
+			// ── THEME ──
+			(function(){
+				const STORAGE_KEY = 'theme';
+				const html = document.documentElement;
+				let theme = localStorage.getItem(STORAGE_KEY)
+					|| html.getAttribute('data-theme')
+					|| (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+				html.setAttribute('data-theme', theme);
+
+				const toggles = document.querySelectorAll('[data-theme-toggle]');
+				function updateIcon() {
+					const isDark = theme === 'dark';
+					toggles.forEach(t => {
+						t.innerHTML = isDark
+							? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+							: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+						t.setAttribute('aria-label', `Переключить на ${isDark ? 'светлую' : 'тёмную'} тему`);
+					});
+				}
+				updateIcon();
+				toggles.forEach(t => t.addEventListener('click', () => {
+					theme = theme === 'dark' ? 'light' : 'dark';
+					html.setAttribute('data-theme', theme);
+					localStorage.setItem(STORAGE_KEY, theme);
+					updateIcon();
+				}));
+			})();
+
+			// ── MOBILE MENU ──
+			const mobileNav = document.getElementById('mobileNav');
+			const mobileOpen = document.getElementById('mobileOpen');
+			const mobileClose = document.getElementById('mobileClose');
+
+			if (mobileOpen) {
+				mobileOpen.addEventListener('click', () => {
+					mobileNav.classList.add('open');
+					document.body.style.overflow = 'hidden';
+				});
+			}
+			function closeMobile() {
+				mobileNav.classList.remove('open');
+				document.body.style.overflow = '';
+			}
+			if (mobileClose) {
+				mobileClose.addEventListener('click', closeMobile);
+			}
+
+			// ── HEADER SCROLL ──
+			const header = document.getElementById('siteHeader');
+			if (header) {
+				window.addEventListener('scroll', () => {
+					header.classList.toggle('header--scrolled', window.scrollY > 10);
+				}, { passive: true });
+			}
+
+			// ── KEYBOARD NAV ──
+			document.addEventListener('keydown', e => {
+				if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('open')) closeMobile();
+			});
+		{% endjs %}
+
 		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
 	</body>
 </html>
