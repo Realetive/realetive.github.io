@@ -1,0 +1,65 @@
+---
+layout: layouts/base.njk
+---
+<section class="section">
+	<div class="section__inner">
+		<p class="section-label">Связаться</p>
+		<h1 class="section-title">Контакты</h1>
+
+		<div class="contacts-layout">
+			<div>
+				<div class="availability">
+					<span class="availability__dot"></span>
+					{{ person.availability }}
+				</div>
+				<p class="contacts-intro">
+					{{ person.lead }}
+				</p>
+				<ul class="contacts-links">
+					{%- for contact in person.contacts %}
+					<li class="contact-link-item">
+						<a href="{{ contact.url }}" target="_blank" rel="noopener noreferrer">
+							<span class="contact-link-item__icon">
+								<i data-lucide="{{ contact.icon }}" width="20" height="20"></i>
+							</span>
+							<span class="contact-link-item__text">
+								<span class="contact-link-item__label">{{ contact.label }}</span>
+								<span class="contact-link-item__value">{{ contact.value }}</span>
+							</span>
+						</a>
+					</li>
+					{%- endfor %}
+				</ul>
+			</div>
+
+			<div>
+				<div class="contacts-info">
+					{%- if person.currentRole %}
+					<div class="contacts-info__item">
+						<span class="contacts-info__label">Текущая роль</span>
+						<span class="contacts-info__value">{{ person.currentRole }}</span>
+					</div>
+					{%- endif %}
+					{%- if person.location %}
+					<div class="contacts-info__item">
+						<span class="contacts-info__label">Локация</span>
+						<span class="contacts-info__value">{{ person.location }}</span>
+					</div>
+					{%- endif %}
+					{%- if person.specialization %}
+					<div class="contacts-info__item">
+						<span class="contacts-info__label">Специализация</span>
+						<span class="contacts-info__value">{{ person.specialization }}</span>
+					</div>
+					{%- endif %}
+					{%- if person.openFor %}
+					<div class="contacts-info__item">
+						<span class="contacts-info__label">Открыт для</span>
+						<span class="contacts-info__value">{{ person.openFor }}</span>
+					</div>
+					{%- endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

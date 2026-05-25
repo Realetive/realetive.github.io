@@ -1,6 +1,6 @@
 ---
 title: Контакты
-layout: layouts/base.njk
+layout: layouts/contacts.njk
 eleventyNavigation:
   key: Контакты
   order: 4

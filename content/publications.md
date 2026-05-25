@@ -1,6 +1,6 @@
 ---
 title: Публикации
-layout: layouts/base.njk
+layout: layouts/publications-index.njk
 eleventyNavigation:
   key: Публикации
   order: 3

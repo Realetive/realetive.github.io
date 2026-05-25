@@ -99,6 +99,22 @@ export default async function(eleventyConfig) {
 		},
 	});
 
+	// Collections
+	eleventyConfig.addCollection("projects", (api) =>
+		api.getFilteredByGlob("content/projects/*.md")
+			.sort((a, b) => (a.data.order || 999) - (b.data.order || 999))
+	);
+
+	eleventyConfig.addCollection("articles", (api) =>
+		api.getFilteredByGlob("content/publications/articles/*.md")
+			.sort((a, b) => (a.data.order || 999) - (b.data.order || 999))
+	);
+
+	eleventyConfig.addCollection("talks", (api) =>
+		api.getFilteredByGlob("content/publications/talks/*.md")
+			.sort((a, b) => (a.data.order || 999) - (b.data.order || 999))
+	);
+
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
 

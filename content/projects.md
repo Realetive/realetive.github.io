@@ -1,6 +1,6 @@
 ---
 title: Проекты
-layout: layouts/base.njk
+layout: layouts/projects-index.njk
 eleventyNavigation:
   key: Проекты
   order: 2

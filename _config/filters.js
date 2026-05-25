@@ -44,4 +44,18 @@ export default function(eleventyConfig) {
 	eleventyConfig.addFilter("dateYear", () => {
 		return DateTime.now().toFormat("yyyy");
 	});
+
+	eleventyConfig.addFilter("stripHtml", (str) => {
+		return (str || "").replace(/<[^>]*>/g, "");
+	});
+
+	eleventyConfig.addFilter("truncate", (str, len = 160) => {
+		const s = (str || "").trim();
+		if (s.length <= len) return s;
+		return s.slice(0, len).replace(/\s+\S*$/, "") + "…";
+	});
+
+	eleventyConfig.addFilter("padStart", (num, len = 2, char = "0") => {
+		return String(num).padStart(len, char);
+	});
 };

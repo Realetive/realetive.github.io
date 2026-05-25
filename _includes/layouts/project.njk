@@ -1,4 +1,43 @@
 ---
 layout: layouts/base.njk
 ---
-{{ content | safe }}
+<div class="page-content">
+	<article class="project-detail">
+		<header class="project-detail__header">
+			<div class="project-detail__icon">
+				<i data-lucide="{{ icon or 'folder' }}" width="28" height="28"></i>
+			</div>
+			<div>
+				<h1 class="project-detail__title">{{ title }}</h1>
+				{%- if role %}
+				<p class="project-detail__role">{{ role }}</p>
+				{%- endif %}
+			</div>
+		</header>
+
+		{%- if tags_list %}
+		<div class="project-detail__tags">
+			{%- for tag in tags_list %}
+			<span class="tag">{{ tag }}</span>
+			{%- endfor %}
+		</div>
+		{%- endif %}
+
+		{%- if url %}
+		<a href="{{ url }}" class="btn-primary project-detail__link" target="_blank" rel="noopener noreferrer">
+			<i data-lucide="external-link" width="16" height="16"></i>
+			Перейти на сайт
+		</a>
+		{%- endif %}
+
+		<div class="project-detail__body">
+			{{ content | safe }}
+		</div>
+
+		{%- if image %}
+		<div class="project-detail__visual">
+			<img src="{{ image }}" alt="{{ title }}" loading="lazy" />
+		</div>
+		{%- endif %}
+	</article>
+</div>

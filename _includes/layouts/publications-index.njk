@@ -1,0 +1,60 @@
+---
+layout: layouts/base.njk
+---
+<section class="section">
+	<div class="section__inner">
+
+		{# ── Articles ── #}
+		<div class="pub-section">
+			<p class="section-label">Письменные</p>
+			<h1 class="section-title">Статьи</h1>
+			<ul class="pub-list">
+				{%- for article in collections.articles %}
+				<li>
+					<a href="{{ article.data.url or article.url }}" class="pub-item"{% if article.data.url %} target="_blank" rel="noopener noreferrer"{% endif %}>
+						<div class="pub-item__icon">
+							<i data-lucide="{{ article.data.icon or 'file-text' }}" width="18" height="18"></i>
+						</div>
+						<div class="pub-item__body">
+							<div class="pub-item__title">{{ article.data.title }}</div>
+							<div class="pub-item__meta">{{ article.data.source }}{% if article.data.meta %} · {{ article.data.meta }}{% endif %}</div>
+						</div>
+						<div class="pub-item__arrow">
+							<i data-lucide="arrow-up-right" width="16" height="16"></i>
+						</div>
+					</a>
+				</li>
+				{%- endfor %}
+			</ul>
+		</div>
+
+		{# ── Talks ── #}
+		<div class="pub-section">
+			<p class="section-label">Устные</p>
+			<h2 class="section-title">Доклады</h2>
+			<div class="talks-grid">
+				{%- for talk in collections.talks %}
+				<div class="talk-card">
+					<div class="talk-card__num">{{ loop.index | padStart }}</div>
+					<div class="talk-card__body">
+						{%- if talk.data.conference %}
+						<div class="talk-card__conf">{{ talk.data.conference }}</div>
+						{%- endif %}
+						<h3 class="talk-card__title">{{ talk.data.title }}</h3>
+						{%- if talk.data.description %}
+						<p class="talk-card__desc">{{ talk.data.description }}</p>
+						{%- endif %}
+						<div class="talk-card__links">
+							<a href="{{ talk.url }}" class="talk-link">
+								<i data-lucide="play-circle" width="14" height="14"></i>
+								Подробнее
+							</a>
+						</div>
+					</div>
+				</div>
+				{%- endfor %}
+			</div>
+		</div>
+
+	</div>
+</section>
