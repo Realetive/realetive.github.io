@@ -20,6 +20,13 @@ export default async function(eleventyConfig) {
 		}
 	});
 
+	// Hide unpublished / legacy content
+	eleventyConfig.ignores.add("content/blog/");
+	eleventyConfig.ignores.add("content/about.md");
+	eleventyConfig.ignores.add("content/tags.njk");
+	eleventyConfig.ignores.add("content/tag-pages.njk");
+	eleventyConfig.ignores.add("content/blog.njk");
+
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig
@@ -27,6 +34,11 @@ export default async function(eleventyConfig) {
 			"./public/": "/"
 		})
 		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl");
+
+	// Project images
+	eleventyConfig.addPassthroughCopy({
+		"./img/": "/img/"
+	});
 
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
@@ -65,12 +77,12 @@ export default async function(eleventyConfig) {
 		type: "atom", // or "rss", "json"
 		outputPath: "/feed/feed.xml",
 		stylesheet: "pretty-atom-feed.xsl",
-		templateData: {
-			eleventyNavigation: {
-				key: "Feed",
-				order: 4
-			}
-		},
+		// templateData: {
+		// 	eleventyNavigation: {
+		// 		key: "Feed",
+		// 		order: 4
+		// 	}
+		// },
 		collection: {
 			name: "posts",
 			limit: 10,
